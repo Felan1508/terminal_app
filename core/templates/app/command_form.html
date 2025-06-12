@@ -1,49 +1,10 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Web Terminal</title>
-    <style>
-        body {
-            background-color: #121212;
-            color: #ffffff;
-            font-family: monospace;
-            padding: 20px;
-        }
-
-        #terminal {
-            background-color: #000;
-            color: #00ff00;
-            padding: 20px;
-            height: 400px;
-            overflow-y: auto;
-            border: 1px solid #333;
-            white-space: pre-wrap;
-        }
-
-        input[type="text"] {
-            width: 70%;
-            padding: 8px;
-            margin-right: 10px;
-            font-family: monospace;
-            background-color: #1e1e1e;
-            color: #fff;
-            border: 1px solid #555;
-        }
-
-        button {
-            padding: 8px 16px;
-            background-color: #00ff00;
-            color: #000;
-            border: none;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        button:hover {
-            background-color: #00cc00;
-        }
-    </style>
+    <link rel="stylesheet" href="{% static 'app/stylesheet.css' %}">
 </head>
 <body>
     <h1>Live Linux Terminal</h1>
@@ -51,40 +12,12 @@
     <div>
         <input type="text" id="command" placeholder="Enter Linux command">
         <button onclick="sendCommand()">Run</button>
+        <button onclick="stopCommand()">Stop</button>
     </div>
 
     <div id="terminal"></div>
 
-    <script>
-        const terminal = document.getElementById('terminal');
-        const socket = new WebSocket('ws://' + window.location.host + '/ws/terminal/');
+    <script src="{% static 'app/script.js' %}"></script>
 
-        socket.onopen = function () {
-            appendOutput("WebSocket connection established.\n");
-        };
-
-        socket.onmessage = function (e) {
-            appendOutput(e.data);
-        };
-
-        socket.onclose = function () {
-            appendOutput("\nWebSocket connection closed.");
-        };
-
-        function appendOutput(data) {
-            terminal.textContent += data;
-            terminal.scrollTop = terminal.scrollHeight;
-        }
-
-        function sendCommand() {
-            const cmdInput = document.getElementById('command');
-            const command = cmdInput.value.trim();
-            if (command) {
-                socket.send(command);
-                appendOutput(`\n$ ${command}\n`);
-                cmdInput.value = '';
-            }
-        }
-    </script>
 </body>
 </html>

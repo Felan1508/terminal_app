@@ -1,0 +1,39 @@
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            font-family: monospace;
+            padding: 20px;
+        }
+
+        #terminal {
+            background-color: #000;
+            color: #00ff00;
+            padding: 20px;
+            height: 400px;
+            overflow-y: auto;
+            border: 1px solid #333;
+            white-space: pre-wrap;
+        }
+
+        input[type="text"] {
+            width: 70%;
+            padding: 8px;
+            margin-right: 10px;
+            font-family: monospace;
+            background-color: #1e1e1e;
+            color: #fff;
+            border: 1px solid #555;
+        }
+
+        button {
+            padding: 8px 16px;
+            background-color: #00ff00;
+            color: #000;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: #00cc00;
+        }
