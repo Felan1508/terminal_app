@@ -11,4 +11,4 @@ def terminal_view(request):
             output = result.stdout + result.stderr
         except Exception as e:
             output = str(e)
-    return render(request, "command_form.html", {"output": output})
+    return render(request, "core/command_form.html", {"output": output})

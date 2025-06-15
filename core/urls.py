@@ -9,4 +9,4 @@ urlpatterns = [
 ]
 
 if settings.DEBUG:
-    urlpatterns += static(settings.STATIC_URL, document_root=os.path.join(settings.BASE_DIR, 'core/static'))
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
