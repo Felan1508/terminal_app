@@ -14,10 +14,17 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.contrib.auth import views as auth_views
+from django.urls import path, include
 from django.contrib import admin
-from django.urls import path, include  # <-- include is important
+from django.conf import settings
+import os
 
 urlpatterns = [
+    path('', auth_views.LoginView.as_view(template_name='login/login.html'), name='login'),
     path('admin/', admin.site.urls),
-    path('', include('core.urls')),  # <-- this includes the core app’s URLs
+    path('core/', include('core.urls')),  # Connect your app
+    path('chatapp/', include('chatapp.urls')),
+
 ]
+

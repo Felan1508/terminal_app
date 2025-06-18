@@ -2,7 +2,7 @@
 from channels.routing import ProtocolTypeRouter, URLRouter
 from channels.auth import AuthMiddlewareStack
 import core.routing
-
+ 
 application = ProtocolTypeRouter({
     "websocket": AuthMiddlewareStack(
         URLRouter(
@@ -10,3 +10,4 @@ application = ProtocolTypeRouter({
         )
     ),
 })
+ 

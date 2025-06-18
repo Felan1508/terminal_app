@@ -1,26 +1,29 @@
-"""
-ASGI config for config project.
-
-It exposes the ASGI callable as a module-level variable named ``application``.
-
-For more information on this file, see
-https://docs.djangoproject.com/en/5.2/howto/deployment/asgi/
-"""
-
 import os
 from channels.routing import ProtocolTypeRouter, URLRouter
-from django.core.asgi import get_asgi_application
 from channels.auth import AuthMiddlewareStack
-import core.routing  # create this next
-
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings")
-
+from django.core.wsgi import get_wsgi_application
+from django.core.asgi import get_asgi_application
+from whitenoise import WhiteNoise
+import core.routing
+import chatapp.routing
+ 
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings')
+ 
+# Tạo WSGI app để gói trong WhiteNoise
+wsgi_app = get_wsgi_application()
+wsgi_with_static = WhiteNoise(wsgi_app)
+ 
+# Gói lại bằng ASGI để nhúng vào ProtocolTypeRouter
+django_asgi_app = get_asgi_application()
+ 
 application = ProtocolTypeRouter({
-    "http": get_asgi_application(),
+    "http": django_asgi_app,  # sử dụng get_asgi_application(), KHÔNG override call
     "websocket": AuthMiddlewareStack(
         URLRouter(
-            core.routing.websocket_urlpatterns
+            core.routing.websocket_urlpatterns +
+            chatapp.routing.websocket_urlpatterns
         )
     ),
 })
-
+ 
+ 

@@ -1,0 +1,19 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login - Terminal Access</title>
+    <link rel="stylesheet" href="{% static 'login/stylesheet.css' %}">
+</head>
+<body>
+    <div class="login-container">
+        <h1>🔐 Terminal Login</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Login</button>
+        </form>
+    </div>
+</body>
+</html>

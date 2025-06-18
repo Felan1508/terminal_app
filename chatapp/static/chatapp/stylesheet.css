@@ -1,0 +1,74 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+/* Sidebar for rooms */
+.room-list {
+    width: 200px;
+    border: 2px solid red;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: #fff0f0;
+}
+
+/* Each room button */
+.room-item {
+    padding: 10px;
+    border: 1px solid red;
+    text-align: center;
+    cursor: pointer;
+    background-color: #ffeaea;
+}
+
+.room-item:hover {
+    background-color: #fdd;
+}
+
+/* Chat section */
+.chat-section {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+/* Chat log area (green) */
+.chat-box {
+    flex-grow: 1;
+    border: 2px solid limegreen;
+    padding: 10px;
+    overflow-y: auto;
+}
+
+/* Input area (blue) */
+.chat-input {
+    display: flex;
+    margin-top: 10px;
+    border: 2px solid skyblue;
+    padding: 5px;
+    gap: 10px;
+}
+
+.chat-input input {
+    flex-grow: 1;
+    padding: 8px;
+}
+
+.chat-input button {
+    padding: 8px 16px;
+}
+.room-item.active-room {
+    background-color: #d0f0ff;
+    border: 2px solid dodgerblue;
+    font-weight: bold;
+    color: black;   
+}

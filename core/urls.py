@@ -1,12 +1,13 @@
+from django.contrib import admin
 from django.urls import path
-from . import views
+from core.views import command_view
 from django.conf import settings
 from django.conf.urls.static import static
 import os
 
 urlpatterns = [
-    path('', views.terminal_view, name='terminal'),
+    
+    path('', command_view, name='command_view'),
+    
 ]
 
-if settings.DEBUG:
-    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

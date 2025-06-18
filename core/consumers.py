@@ -2,6 +2,9 @@
 import asyncio
 import shlex
 from channels.generic.websocket import AsyncWebsocketConsumer
+import uuid
+import datetime
+import os
 
 class TerminalConsumer(AsyncWebsocketConsumer):
     async def connect(self):
@@ -14,6 +17,16 @@ class TerminalConsumer(AsyncWebsocketConsumer):
     async def disconnect(self, close_code):
         print(f"WebSocket disconnected with code: {close_code}")
         await self._stop_process()
+
+        if hasattr(self, "log_path"):
+            try:
+                with open(self.log_path, "a") as f:
+                    f.write(f"\n⛔ WebSocket connection closed. Code: {close_code}\n")
+                    f.flush()
+                    os.fsync(f.fileno())
+            except Exception as e:
+                print(f"Error writing to log file during disconnect: {e}")
+
 
     async def receive(self, text_data):
         print("Received:", text_data)
@@ -45,16 +58,42 @@ class TerminalConsumer(AsyncWebsocketConsumer):
             await self.send(f"❌ Error: {str(e)}\n")
             self.process = None
 
+   
+
     async def _stream_output(self):
+        # Create logs directory with timestamped subfolders
+        date_folder = datetime.datetime.now().strftime("day(%d-%m-%Y)")
+        logs_dir = os.path.join("logs", date_folder)
+        os.makedirs(logs_dir, exist_ok=True)
+
+        filename = f"{uuid.uuid4().hex}_session.txt"
+        filepath = os.path.join(logs_dir, filename)
+        self.log_path = filepath
+
         try:
-            while not self.stop_event.is_set():
-                line = await self.process.stdout.readline()
-                if not line:
-                    break
-                await self.send(line.decode())
+            with open(filepath, "w") as f:
+                while not self.stop_event.is_set():
+                    line = await self.process.stdout.readline()
+                    if not line:
+                        break
+                    decoded_line = line.decode()
+                    await self.send(decoded_line)
+                    f.write(decoded_line)
+                    f.flush()
+        except Exception as e:
+            # Internal server-side error
+            error_msg = f"\n❌ Internal error: {str(e)}\n"
+            await self.send(error_msg)
+
+            with open(filepath, "a") as f:
+                f.write(error_msg)
+                f.flush()
         finally:
             await self.send("✅ Process finished.\n")
-            self.process = None
+            with open(filepath, "a") as f:
+                f.write("✅ Process finished.\n")
+
+
 
     async def _stop_process(self):
         if self.process and self.process.returncode is None:
