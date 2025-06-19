@@ -3,8 +3,6 @@ from django.shortcuts import render
 from .forms import CommandForm
 import subprocess
 
-def login_view(request):
-    return render(request, 'registration/login.html')
 
 
 @login_required

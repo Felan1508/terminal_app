@@ -25,6 +25,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('core/', include('core.urls')),  # Connect your app
     path('chatapp/', include('chatapp.urls')),
+    path('logout/', auth_views.LogoutView.as_view(next_page='/'), name='logout'),
 
 ]
 

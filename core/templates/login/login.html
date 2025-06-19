@@ -5,10 +5,11 @@
     <meta charset="UTF-8">
     <title>Login - Terminal Access</title>
     <link rel="stylesheet" href="{% static 'login/stylesheet.css' %}">
+    <link rel="icon" type="image/x-icon" href="{% static 'login/logi.ico' %}">
 </head>
 <body>
     <div class="login-container">
-        <h1>🔐 Terminal Login</h1>
+        <h1>🥑 Terminal Login 🥑</h1>
         <form method="post">
             {% csrf_token %}
             {{ form.as_p }}
