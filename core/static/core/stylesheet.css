@@ -90,11 +90,12 @@ button:hover {
 
 /* Position and style the close button (top right corner) */
 .sidebar .closebtn {
-  position: absolute;
-  top: -11px;
-  right: 175px;
-  font-size: 36px;
-  margin-left: 50px;
+    position: absolute;
+    top: -50px;
+    left: -29px;
+    font-size: 36px;
+    margin-left: 50px;
+    font-size: 77px;
 }
 
 /* The button used to open the sidebar */
