@@ -1,0 +1,15 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Web Terminal</title>  
+    <link rel="stylesheet" href="{% static 'core/stylesheet.css' %}">
+   
+</head>
+<h1>Files in Current Directory</h1>
+<ul id="terminal">
+  {% for file in files %}
+    <li><a href="{% url 'edit_file' file %}">{{ file }}</a></li>
+  {% endfor %}
+</ul>

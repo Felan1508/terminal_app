@@ -35,7 +35,6 @@ LLOWED_HOSTS = ['192.168.80.65', 'localhost', '127.0.0.1']
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'chatapp/static'),
     os.path.join(BASE_DIR, 'core/static'),
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
@@ -53,7 +52,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'core',
     'channels',
-    'chatapp',
+    'file_manipulator',
 ]
 ASGI_APPLICATION = 'config.asgi.application'
 

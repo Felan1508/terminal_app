@@ -5,7 +5,7 @@ from django.core.wsgi import get_wsgi_application
 from django.core.asgi import get_asgi_application
 from whitenoise import WhiteNoise
 import core.routing
-import chatapp.routing
+
  
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings')
  
@@ -20,8 +20,8 @@ application = ProtocolTypeRouter({
     "http": django_asgi_app,  # sử dụng get_asgi_application(), KHÔNG override call
     "websocket": AuthMiddlewareStack(
         URLRouter(
-            core.routing.websocket_urlpatterns +
-            chatapp.routing.websocket_urlpatterns
+            core.routing.websocket_urlpatterns 
+            
         )
     ),
 })

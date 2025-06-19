@@ -24,7 +24,7 @@ urlpatterns = [
     path('', auth_views.LoginView.as_view(template_name='login/login.html'), name='login'),
     path('admin/', admin.site.urls),
     path('core/', include('core.urls')),  # Connect your app
-    path('chatapp/', include('chatapp.urls')),
+    path('files/', include('file_manipulator.urls')),  
     path('logout/', auth_views.LogoutView.as_view(next_page='/'), name='logout'),
 
 ]
