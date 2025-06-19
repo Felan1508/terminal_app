@@ -4,36 +4,41 @@
 <head>
     <meta charset="UTF-8">
     <title>Web Terminal</title>  
-    {% load static %}
     <link rel="stylesheet" href="{% static 'core/stylesheet.css' %}">
-
-    
+   
 </head>
 <body>
-    {% if user.is_authenticated %}
-  <form action="{% url 'logout' %}" method="post" style="display:inline;">
-    {% csrf_token %}
-    <button type="submit">Logout</button>
-  </form>
-{% endif %}
-    <div id="header">
-   
-  <h1>Live Linux Terminal</h1>
-  <img id="logo" src="{% static 'core/logo.jpg' %}" alt="Logo">
 
+<div id="mySidebar" class="sidebar">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&#9776;</a>
+  <a href="#">About</a>
+  <a href="#">Services</a>
+  <a href="#">Clients</a>
+  <a href="#">Contact</a>
 </div>
 
+<button class="openbtn" onclick="openNav()">&#9776;</button>
+    <!-- Main Content -->
+    <div id="main">
+        
+      
 
-    <div>
-        <input type="text" id="command" placeholder="Enter Linux command">
-        <button onclick="sendCommand()">Run</button>
-        <button onclick="stopCommand()">Stop</button>
+        <div id="header">
+            <h1>Live Linux Terminal</h1>
+            <img id="logo" src="{% static 'core/logo.jpg' %}" alt="Logo">
+        </div>
+
+        <div>
+            <input type="text" id="command" placeholder="Enter Linux command">
+            <button onclick="sendCommand()">Run</button>
+            <button onclick="stopCommand()">Stop</button>
+        </div>
+
+        <div id="terminal"></div>
     </div>
 
-    <div id="terminal"></div>
 
-    <script src="{% static 'core/script.js' %}"></script>
-
+<script src="{% static 'core/script.js' %}"></script>
 
 </body>
 </html>
