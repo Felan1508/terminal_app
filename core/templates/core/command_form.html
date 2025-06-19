@@ -15,6 +15,14 @@
   <a href="#">Services</a>
   <a href="#">Clients</a>
   <a href="#">Contact</a>
+  <div class="logout-btn-container">
+    {% if user.is_authenticated %}
+        <form action="{% url 'logout' %}" method="post" class="logout-form">
+            {% csrf_token %}
+            <button type="submit" class="logout-btn">🚪 Logout</button>
+        </form>
+        {% endif %}
+    </div>
 </div>
 
 <button class="openbtn" onclick="openNav()">&#9776;</button>

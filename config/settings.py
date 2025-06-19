@@ -28,6 +28,7 @@ DEBUG = True
 
 LOGIN_URL = '/'
 LOGIN_REDIRECT_URL = '/core/'
+LOGOUT_REDIRECT_URL = '/'  # or any URL you want after logout
 
 LLOWED_HOSTS = ['192.168.80.65', 'localhost', '127.0.0.1']
 # Static file config
